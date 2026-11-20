@@ -1,0 +1,6 @@
+{
+  "name": "Mess Fix",
+  "description": "Student-focused hostel and college mess platform for daily menus, meal timings, meal ratings, feedback, and trackable complaint resolution.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

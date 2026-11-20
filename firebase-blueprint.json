@@ -1,0 +1,435 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "Non-PII application profile for a student or mess operator.",
+      "type": "object",
+      "properties": {
+        "uid": {
+          "type": "string",
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "displayName": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80
+        },
+        "photoUrl": {
+          "type": "string",
+          "maxLength": 500
+        },
+        "activeMessId": {
+          "type": "string",
+          "maxLength": 128
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": ["uid", "displayName", "createdAt", "updatedAt"]
+    },
+    "UserPrivateInfo": {
+      "title": "UserPrivateInfo",
+      "description": "Isolated PII record for the authenticated user.",
+      "type": "object",
+      "properties": {
+        "uid": {
+          "type": "string",
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "email": {
+          "type": "string",
+          "maxLength": 160
+        },
+        "hostelRoom": {
+          "type": "string",
+          "maxLength": 40
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": ["uid", "email", "updatedAt"]
+    },
+    "Mess": {
+      "title": "Mess",
+      "description": "A hostel, college, or private PG mess facility.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 100
+        },
+        "campusOrArea": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 100
+        },
+        "type": {
+          "type": "string",
+          "enum": ["College Hostel", "Campus Central", "Private PG Mess"]
+        },
+        "ownerId": {
+          "type": "string",
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "ownerName": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80
+        },
+        "breakfastTiming": {
+          "type": "string",
+          "maxLength": 50
+        },
+        "lunchTiming": {
+          "type": "string",
+          "maxLength": 50
+        },
+        "snacksTiming": {
+          "type": "string",
+          "maxLength": 50
+        },
+        "dinnerTiming": {
+          "type": "string",
+          "maxLength": 50
+        },
+        "announcement": {
+          "type": "string",
+          "maxLength": 300
+        },
+        "isActive": {
+          "type": "boolean"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "campusOrArea",
+        "type",
+        "ownerId",
+        "ownerName",
+        "breakfastTiming",
+        "lunchTiming",
+        "snacksTiming",
+        "dinnerTiming",
+        "announcement",
+        "isActive",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "MessOperator": {
+      "title": "MessOperator",
+      "description": "Authorized operator or hostel representative for a mess.",
+      "type": "object",
+      "properties": {
+        "uid": {
+          "type": "string",
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "messId": {
+          "type": "string",
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "displayName": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80
+        },
+        "roleLabel": {
+          "type": "string",
+          "enum": ["Mess Manager", "Hostel Warden", "Student Rep"]
+        },
+        "addedBy": {
+          "type": "string",
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": ["uid", "messId", "displayName", "roleLabel", "addedBy", "createdAt"]
+    },
+    "DailyMenu": {
+      "title": "DailyMenu",
+      "description": "Daily meal items and notes for a specific date at a mess.",
+      "type": "object",
+      "properties": {
+        "messId": {
+          "type": "string",
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "date": {
+          "type": "string",
+          "minLength": 10,
+          "maxLength": 10,
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+        },
+        "breakfastItems": {
+          "type": "array"
+        },
+        "lunchItems": {
+          "type": "array"
+        },
+        "snacksItems": {
+          "type": "array"
+        },
+        "dinnerItems": {
+          "type": "array"
+        },
+        "specialNote": {
+          "type": "string",
+          "maxLength": 240
+        },
+        "updatedBy": {
+          "type": "string",
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "updatedByName": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "messId",
+        "date",
+        "breakfastItems",
+        "lunchItems",
+        "snacksItems",
+        "dinnerItems",
+        "specialNote",
+        "updatedBy",
+        "updatedByName",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "MealRating": {
+      "title": "MealRating",
+      "description": "Student meal rating and hygiene feedback for a daily meal.",
+      "type": "object",
+      "properties": {
+        "messId": {
+          "type": "string",
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "date": {
+          "type": "string",
+          "minLength": 10,
+          "maxLength": 10,
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+        },
+        "mealType": {
+          "type": "string",
+          "enum": ["Breakfast", "Lunch", "Snacks", "Dinner"]
+        },
+        "rating": {
+          "type": "number"
+        },
+        "hygieneRating": {
+          "type": "number"
+        },
+        "portionAdequate": {
+          "type": "boolean"
+        },
+        "comment": {
+          "type": "string",
+          "maxLength": 400
+        },
+        "authorId": {
+          "type": "string",
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "authorName": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "messId",
+        "date",
+        "mealType",
+        "rating",
+        "hygieneRating",
+        "portionAdequate",
+        "comment",
+        "authorId",
+        "authorName",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "Complaint": {
+      "title": "Complaint",
+      "description": "Trackable student concern or complaint with operator response.",
+      "type": "object",
+      "properties": {
+        "messId": {
+          "type": "string",
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 120
+        },
+        "description": {
+          "type": "string",
+          "minLength": 5,
+          "maxLength": 1000
+        },
+        "category": {
+          "type": "string",
+          "enum": [
+            "Food Quality",
+            "Hygiene & Cleanliness",
+            "Portion Size",
+            "Menu / Timing Mismatch",
+            "Service & Staff",
+            "Missed Meal"
+          ]
+        },
+        "mealType": {
+          "type": "string",
+          "enum": ["Breakfast", "Lunch", "Snacks", "Dinner", "General"]
+        },
+        "mealDate": {
+          "type": "string",
+          "minLength": 10,
+          "maxLength": 10,
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["Submitted", "Acknowledged", "In Review", "Resolved"]
+        },
+        "operatorResponse": {
+          "type": "string",
+          "maxLength": 800
+        },
+        "respondedByName": {
+          "type": "string",
+          "maxLength": 80
+        },
+        "authorId": {
+          "type": "string",
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "authorName": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "resolvedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "messId",
+        "title",
+        "description",
+        "category",
+        "mealType",
+        "mealDate",
+        "status",
+        "operatorResponse",
+        "respondedByName",
+        "authorId",
+        "authorName",
+        "createdAt",
+        "updatedAt"
+      ]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/UserProfile" },
+      "description": "User application profiles without PII."
+    },
+    "/users/{userId}/private/{docId}": {
+      "schema": { "$ref": "#/entities/UserPrivateInfo" },
+      "description": "Isolated PII records for each user."
+    },
+    "/messes/{messId}": {
+      "schema": { "$ref": "#/entities/Mess" },
+      "description": "Registered campus, hostel, and private PG messes."
+    },
+    "/messes/{messId}/operators/{operatorId}": {
+      "schema": { "$ref": "#/entities/MessOperator" },
+      "description": "Authorized operators for a given mess."
+    },
+    "/messes/{messId}/menus/{menuId}": {
+      "schema": { "$ref": "#/entities/DailyMenu" },
+      "description": "Daily menus keyed by YYYY-MM-DD for a mess."
+    },
+    "/messes/{messId}/ratings/{ratingId}": {
+      "schema": { "$ref": "#/entities/MealRating" },
+      "description": "Meal quality and hygiene ratings submitted by students."
+    },
+    "/messes/{messId}/complaints/{complaintId}": {
+      "schema": { "$ref": "#/entities/Complaint" },
+      "description": "Trackable student complaints and operator follow-ups."
+    }
+  }
+}
